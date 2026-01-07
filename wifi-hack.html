@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WiFi Hack</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    background:radial-gradient(circle at top,#0f2027,#000);
+    font-family:'Orbitron',sans-serif;
+    color:#fff;
+    padding:20px;
+}
+.wrapper{max-width:430px;margin:auto}
+.card{
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(15px);
+    border-radius:16px;
+    padding:22px;
+    margin-bottom:20px;
+    box-shadow:0 0 30px rgba(0,255,204,.25);
+    animation:fadeIn .8s ease;
+}
+h1{text-align:center;color:#00ffcc}
+p{text-align:center;opacity:.85}
+
+.btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#00ffcc,#00bfa5);
+    color:#000;
+    font-weight:600;
+    cursor:pointer;
+}
+.btn:hover{box-shadow:0 0 15px #00ffcc}
+
+.option{
+    border:1px solid rgba(0,255,204,.4);
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:10px;
+    cursor:pointer;
+}
+.option.selected{
+    background:#00ffcc;
+    color:#000;
+    box-shadow:0 0 12px #00ffcc;
+}
+
+.progress-box{
+    background:#020c10;
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:15px;
+}
+.progress-bar{
+    height:14px;
+    width:0%;
+    background:#00ffcc;
+    transition:.3s;
+}
+
+.scan-text{
+    font-size:13px;
+    margin-top:10px;
+    opacity:.85;
+    animation:blink 1s infinite;
+}
+
+.code{
+    background:#020c10;
+    padding:12px;
+    margin-bottom:8px;
+    border-radius:8px;
+    border-left:4px solid #00ffcc;
+    cursor:pointer;
+}
+
+.fade-out{animation:fadeOut .7s forwards}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1}
+}
+@keyframes fadeOut{
+    to{opacity:0;transform:translateY(-10px)}
+}
+@keyframes blink{
+    50%{opacity:.4}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- Telegram auto-hide -->
+<div class="card" id="tg">
+    <h1>WiFi Hack</h1>
+    <p>Join our Telegram Channel</p>
+    <a href="https://t.me/ak_tech_pro2025" target="_blank">
+        <button class="btn">Telegram Channel</button>
+    </a>
+</div>
+
+<!-- Main -->
+<div class="card">
+    <h1>WiFi Hack</h1>
+
+    <p>WiFi models</p>
+    <div class="option" onclick="select(this,'wifi')">Mobile WiFi</div>
+    <div class="option" onclick="select(this,'wifi')">Router</div>
+    <div class="option" onclick="select(this,'wifi')">None of above</div>
+
+    <p>Your mobile model</p>
+    <div class="option" onclick="select(this,'mobile')">iPhone</div>
+    <div class="option" onclick="select(this,'mobile')">Android</div>
+
+    <button class="btn" onclick="startScan()">Done</button>
+
+    <!-- Scan -->
+    <div id="scan" style="display:none">
+        <div class="scan-text" id="scanText">Initializing scan...</div>
+        <div class="progress-box">
+            <div class="progress-bar" id="bar"></div>
+        </div>
+    </div>
+
+    <!-- Codes -->
+    <div id="codes" style="display:none;margin-top:15px">
+        <div class="code" onclick="copy(this)">Afghan123321</div>
+        <div class="code" onclick="copy(this)">KhanAFG</div>
+        <div class="code" onclick="copy(this)">Ahmad2025</div>
+        <div class="code" onclick="copy(this)">ZeroXXX1122</div>
+        <div class="code" onclick="copy(this)">Afghanistan124</div>
+        <div class="code" onclick="copy(this)">Code12356</div>
+        <div class="code" onclick="copy(this)">HavkAvai123654</div>
+        <div class="code" onclick="copy(this)">khanafg124321</div>
+        <div class="code" onclick="copy(this)">asdfgj134</div>
+        <div class="code" onclick="copy(this)">afghankhan2233114455</div>
+    </div>
+</div>
+
+</div>
+
+<script>
+// Telegram auto hide
+setTimeout(()=>{
+    let t=document.getElementById("tg");
+    t.classList.add("fade-out");
+    setTimeout(()=>t.remove(),700);
+},3000);
+function select(el,type){
+    document.querySelectorAll(".option").forEach(o=>{
+        if(type==="wifi" && ["Mobile WiFi","Router","None of above"].includes(o.innerText)) o.classList.remove("selected");
+        if(type==="mobile" && ["iPhone","Android"].includes(o.innerText)) o.classList.remove("selected");
+    });
+    el.classList.add("selected");
+}
+
+function startScan(){
+    document.getElementById("scan").style.display="block";
+    let bar=document.getElementById("bar");
+    let text=document.getElementById("scanText");
+    let p=0;
+    let fakeTexts=[
+        "Connecting to device...",
+        "Bypassing security...",
+        "Scanning network...",
+        "Decrypting handshake...",
+        "Finalizing..."
+    ];
+    let i=0;
+
+    let interval=setInterval(()=>{
+        p+=5;
+        bar.style.width=p+"%";
+        if(p%20===0 && fakeTexts[i]) text.innerText=fakeTexts[i++];
+        if(p>=100){
+            clearInterval(interval);
+            text.innerText="Scan completed ✔";
+            setTimeout(()=>document.getElementById("codes").style.display="block",700);
+        }
+    },200);
+}
+
+function copy(el){
+    navigator.clipboard.writeText(el.innerText);
+    alert("Copied ✔");
+}
+</script>
+
+</body>
+</html>
